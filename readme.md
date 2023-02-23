@@ -7,6 +7,18 @@ Forked from [https://github.com/RWaltersMA/mongo-spark-jupyter/]
 - Confirmed read operation running Zepellin Python and write operation wiht pyspark, both operation using the local MongoDB RS deployed with `m` tool
 - More info on `successfull read test.ipynb` and `succesfull write test pyspark.txt`
 
+# Requirements
+
+Perform the below config on the local MongoDB RS to enable the communication tcp/Ip between the local host os and the docker containers
+
+```
+cfg=rs.conf();
+cfg.members[0].host="host.docker.internal:27017";
+cfg.members[1].host="host.docker.internal:27018";
+cfg.members[2].host="host.docker.internal:27019";
+rs.reconfig(cfg);
+```
+
 # To Do list
 
 - Confirm that this repro enviroment repro running java and java/scala releases
