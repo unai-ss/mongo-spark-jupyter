@@ -1,0 +1,87 @@
+(base) jovyan@afbf11e203c2:~$ pyspark --conf "spark.mongodb.read.connection.uri=mongodb://host.docker.internal:27017/countries.countries" --conf "spark.mongodb.write.connection.uri=mongodb://host.docker.internal:27017/countries.countries" --conf "spark.mongodb.write.database.uri=countries" --conf "spark.mongodb.write.collection.uri=countries" --conf "spark.mongodb.write.upsertDocument=false" --packages org.mongodb.spark:mongo-spark-connector_2.12:10.1.0
+
+
+
+
+Python 3.9.10 | packaged by conda-forge | (main, Feb  1 2022, 21:24:11) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.spark.unsafe.Platform (file:/usr/local/spark-3.2.1-bin-hadoop3.2/jars/spark-unsafe_2.12-3.2.1.jar) to constructor java.nio.DirectByteBuffer(long,int)
+WARNING: Please consider reporting this to the maintainers of org.apache.spark.unsafe.Platform
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+:: loading settings :: url = jar:file:/usr/local/spark-3.2.1-bin-hadoop3.2/jars/ivy-2.5.0.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /home/jovyan/.ivy2/cache
+The jars for the packages stored in: /home/jovyan/.ivy2/jars
+org.mongodb.spark#mongo-spark-connector_2.12 added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-551e3c29-df9e-43e0-87d5-68fa03a3630d;1.0
+        confs: [default]
+        found org.mongodb.spark#mongo-spark-connector_2.12;10.1.0 in central
+        found org.mongodb#mongodb-driver-sync;4.8.2 in central
+        [4.8.2] org.mongodb#mongodb-driver-sync;[4.8.1,4.8.99)
+        found org.mongodb#bson;4.8.2 in central
+        found org.mongodb#mongodb-driver-core;4.8.2 in central
+        found org.mongodb#bson-record-codec;4.8.2 in central
+downloading https://repo1.maven.org/maven2/org/mongodb/spark/mongo-spark-connector_2.12/10.1.0/mongo-spark-connector_2.12-10.1.0.jar ...
+        [SUCCESSFUL ] org.mongodb.spark#mongo-spark-connector_2.12;10.1.0!mongo-spark-connector_2.12.jar (94ms)
+:: resolution report :: resolve 2975ms :: artifacts dl 106ms
+        :: modules in use:
+        org.mongodb#bson;4.8.2 from central in [default]
+        org.mongodb#bson-record-codec;4.8.2 from central in [default]
+        org.mongodb#mongodb-driver-core;4.8.2 from central in [default]
+        org.mongodb#mongodb-driver-sync;4.8.2 from central in [default]
+        org.mongodb.spark#mongo-spark-connector_2.12;10.1.0 from central in [default]
+        ---------------------------------------------------------------------
+        |                  |            modules            ||   artifacts   |
+        |       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+        ---------------------------------------------------------------------
+        |      default     |   5   |   2   |   1   |   0   ||   5   |   1   |
+        ---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-551e3c29-df9e-43e0-87d5-68fa03a3630d
+        confs: [default]
+        1 artifacts copied, 4 already retrieved (152kB/10ms)
+23/02/23 08:23:53 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+23/02/23 08:23:55 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+23/02/23 08:23:55 WARN Utils: Service 'SparkUI' could not bind on port 4041. Attempting port 4042.
+23/02/23 08:23:55 WARN Utils: Service 'SparkUI' could not bind on port 4042. Attempting port 4043.
+23/02/23 08:23:55 WARN Utils: Service 'SparkUI' could not bind on port 4043. Attempting port 4044.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 3.2.1
+      /_/
+
+Using Python version 3.9.10 (main, Feb  1 2022 21:24:11)
+Spark context Web UI available at http://afbf11e203c2:4044
+Spark context available as 'sc' (master = local[*], app id = local-1677140635619).
+SparkSession available as 'spark'.
+
+
+
+>>> people = spark.createDataFrame([("France", "Paris")], ["country", "capital"])
+
+
+
+>>> people.write.format("mongodb").mode("append").save()
+
+
+>>>         
+
+### MongoDB output
+
+```
+replset [primary] countries> db.countries.find()
+[
+  {
+    _id: ObjectId("63f722b9f86387720a0a89b9"),
+    country: 'France',
+    capital: 'Paris'
+  }
+]
+replset [primary] countries>
+```

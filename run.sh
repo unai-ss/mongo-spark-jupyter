@@ -1,12 +1,12 @@
 #! /usr/bin/env bash
 
-set -e
-(
-if lsof -Pi :27017 -sTCP:LISTEN -t >/dev/null ; then
-    echo "Please terminate the local mongod on 27017"
-    exit 1
-fi
-)
+#set -e
+#(
+#if lsof -Pi :27017 -sTCP:LISTEN -t >/dev/null ; then
+#    echo "Please terminate the local mongod on 27017"
+#    exit 1
+#fi
+#)
 
 echo "Starting docker ."
 docker-compose up -d --build
@@ -21,26 +21,26 @@ trap clean_up EXIT
 
 sleep 5
 
-echo -e "\nConfiguring the MongoDB ReplicaSet.\n"
+#echo -e "\nConfiguring the MongoDB ReplicaSet.\n"
 # docker-compose exec mongo1 /usr/bin/mongosh --eval '''rsconf = { _id : "rs0", members: [ { _id : 0, host : "mongo1:27017", priority: 1.0 }]};
 # rs.initiate(rsconf);'''
 
-docker-compose exec mongo1 /usr/bin/mongosh --eval '''rsconf = {
-      _id : "rs0",
-      members: [
-        { _id : 0, host : "mongo1:27017", priority: 1.0 },
-        { _id : 1, host : "mongo2:27017", priority: 0.5 },
-        { _id : 2, host : "mongo3:27017", priority: 0.5 }
-      ]
-    };
-    rs.initiate(rsconf);
-'''
+#docker-compose exec mongo1 /usr/bin/mongosh --eval '''rsconf = {
+#      _id : "rs0",
+#      members: [
+#        { _id : 0, host : "mongo1:27017", priority: 1.0 },
+#        { _id : 1, host : "mongo2:27017", priority: 0.5 },
+#        { _id : 2, host : "mongo3:27017", priority: 0.5 }
+#      ]
+#    };
+#    rs.initiate(rsconf);
+#'''
 
 #rs.conf();
 #
 #docker cp mongosparkv10.jar jupyterlab:/home/jovyan/
 
-echo -e "\nUploading test data into Stocks database\n"
+#echo -e "\nUploading test data into Stocks database\n"
 
 #docker-compose exec mongo1 apt-get update
 #docker-compose exec mongo1 apt-get install wget 
