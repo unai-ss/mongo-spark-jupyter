@@ -3,8 +3,13 @@ Forked from [https://github.com/RWaltersMA/mongo-spark-jupyter/]
 # Modify
 
 - Remove mongod RS containers
-- Confirmed the connection between spark-master, spark-worker1 and spark-worker2 with local MongoDB RS deployed with `m`  tool.
+- Confirmed the connection between spark-master, spark-worker1 and spark-worker2 with local MongoDB RS deployed with `m`  tool. 
 - Confirmed read operation running Zepellin Python and write operation wiht pyspark, both operation using the local MongoDB RS deployed with `m` tool
+- More info on `successfull read test.ipynb` and `succesfull write test pyspark.txt`
+
+# To Do list
+
+- Confirm that this repro enviroment repro running java and java/scala releases
 
 # Using MongoDB with Jupyter Labs
 
