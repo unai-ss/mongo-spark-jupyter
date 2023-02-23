@@ -9,6 +9,9 @@ Forked from [https://github.com/RWaltersMA/mongo-spark-jupyter/]
 
 # Requirements
 
+Add host.docker.internal FQDN to the /etc/hosts file. It will help us to reach to the localhost from the docker container. echo '127.0.0.1 host.docker.internal' | sudo tee -a /etc/hosts
+
+
 Perform the below config on the local MongoDB RS to enable the communication tcp/Ip between the local host os and the docker containers
 
 ```
