@@ -1,3 +1,11 @@
+Forked from [https://github.com/RWaltersMA/mongo-spark-jupyter/]
+
+# Modify
+
+- Remove mongod RS containers
+- Confirmed the connection between spark-master, spark-worker1 and spark-worker2 with local MongoDB RS deployed with `m`  tool.
+- Confirmed read operation running Zepellin Python and write operation wiht pyspark, both operation using the local MongoDB RS deployed with `m` tool
+
 # Using MongoDB with Jupyter Labs
 
 This repository showcases how to leverage MongoDB data in your JupyterLab notebooks via the MongoDB Spark Connector and PySpark.  We will load financial security data from MongoDB, calculate a moving average then update the data in MongoDB with these new data.  This repository has two components:
