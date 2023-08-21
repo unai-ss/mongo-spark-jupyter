@@ -1,4 +1,6 @@
-Forked from [https://github.com/RWaltersMA/mongo-spark-jupyter/]
+Forked from [https://github.com/RWaltersMA/mongo-spark-jupyter/] and [https://github.com/big-data-europe/docker-spark]
+
+https://towardsdatascience.com/dockerizing-apache-zeppelin-and-apache-spark-for-easy-deployment-1814d0c1c245
 
 # Modify
 
